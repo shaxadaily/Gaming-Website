@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% block banner %}
+    <div class="page-heading header-text">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>{{ game.title }}</h3>
+                    <span class="breadcrumb"><a href="#">Home</a>  >  <a href="#">Shop</a>  > {{ game.title }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock banner %}
+
+
+{% block main %}
+    <div class="single-product section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="left-image">
+                        <img class="detail_image" src="{{ game.show_poster }}" alt="">
+                    </div>
+                </div>
+
+                <div class="col-lg-6 align-self-center">
+                    {% include 'store/components/product-details/_game_title.html' %}
+
+
+
+
+                    {% if profile.subscription %}
+
+                        <a href="{{ game.download }}" class="btn btn-success"><i
+                                class="fa fa-shopping-bag m-lg-2"></i>Скачать</a>
+
+                    {% else %}
+                        <a href="{{ profile.get_absolute_url }}#profile" class="btn btn-danger"><i
+                                class="fa fa-shopping-bag m-lg-2"></i>Купить</a>
+                    {% endif %}
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="sep"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--СЛАЙДЕР-->
+
+    <!--КОНЕЦ СЛАЙДЕРА-->
+
+
+    <div class="more-info">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="tabs-content">
+                        <div class="row">
+                            <div class="nav-wrapper ">
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link active" id="description-tab" data-bs-toggle="tab"
+                                                data-bs-target="#description" type="button" role="tab"
+                                                aria-controls="description" aria-selected="true">Описание Игры
+                                        </button>
+                                    </li>
+
+                                </ul>
+                            </div>
+                            <div class="tab-content" id="myTabContent">
+                                {% include 'store/components/product-details/_description.html' %}
+
+                                {% include 'store/components/product-details/_reviews.html' %}
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if user.is_superuser %}
+        <div class="container mt-4 pb-5">
+            <form class="d-flex justify-content-end" action="{% url 'delete_game' game.pk %}"
+                  enctype="multipart/form-data"
+                  method="post">
+                {% csrf_token %}
+                <input class="m-lg-2 btn btn-danger" type="submit" value="Удалить игру">
+                <a class="m-lg-2 d-flex justify-content-end btn btn-success" href="{% url 'update_form' game.pk %}">Изменить</a>
+            </form>
+        </div>
+    {% endif %}
+
+    <div class="section categories related-games">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-6">
+                    <div class="section-heading">
+
+
+                        <h6>{{ genres }}</h6>
+
+                        <h2>Похожие Игры</h2>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="main-button">
+                        <a href="{% url 'shop_page' %}">Посмотреть все</a>
+                    </div>
+                </div>
+                {% include 'store/components/product-details/_related_games.html' %}
+
+            </div>
+        </div>
+    </div>
+{% endblock main %}

@@ -1,0 +1,38 @@
+{% load static %}
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="{% url 'index' %}" class="logo">
+                        <img src=" {% static 'store/assets/images/logo.png' %} " alt="" style="width: 158px;">
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+
+                        <li><a href="{% url 'index' %}" class="{% if request.path == '/' %} active {% endif %}">Главная</a></li>
+                      <li><a href="{% url 'shop_page' %}" class="{% if request.path == '/shop/' %} active {% endif %}">Наш магазин</a></li>
+
+
+                        {% if user.is_authenticated %}
+
+                            <li><a class="{% if '/profile/' in request.path %} active {% endif %}" href="{% url 'profile' request.user.pk %}#profile">Профиль</a></li>
+
+                            <li><a class="is_active" href="{% url 'logout' %}">Выйти</a></li>
+                        {% else %}
+                        <li><a href="{% url 'login' %}" class="{% if request.path == '/login/' %} active {% endif %}">Войти</a></li>
+                        <li><a href="{% url 'register' %}">Зарегестрироваться</a></li>
+                        {% endif %}
+
+                  </ul>
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+  </header>

@@ -1,0 +1,10 @@
+{% for related_game in related_games %}
+<div class="col-lg col-sm-6 col-xs-12">
+    <div class="item item_related">
+        <h4>{{ genres }}</h4>
+        <div class="thumb">
+            <a href="{{ related_game.get_absolute_url }}"><img class="image__game" src="{{ related_game.show_poster }}" alt=""></a>
+        </div>
+    </div>
+</div>
+{% endfor %}

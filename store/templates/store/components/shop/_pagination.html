@@ -1,0 +1,23 @@
+
+<div class="row">
+        <div class="col-lg-12">
+          <ul class="pagination">
+                {% if servicesData.has_previous %}
+          <li><a href="/services/?page=1"> First </a></li>
+
+            <li class="is_active" ><a href="{{ servicesData.previous_page_number }}">Previous</li>
+         {% endif %}
+            <li><a href="#">1</a></li>
+
+
+            <li><a href="?page={{ page }}">(current)</a></li>
+            <li><a href="?page={{ page }}">{{ page }}</a></li>
+            <li><a href="?page={{ page }}">{{ page }}</a></li>
+            <li><a href="?page={{ page }}">{{ page }}</a></li>
+
+
+            <li><a href="#"> &gt; </a></li>
+
+          </ul>
+        </div>
+      </div>

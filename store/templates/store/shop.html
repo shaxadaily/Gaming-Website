@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block banner %}
+    <div class="page-heading header-text">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Наш магазин</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock banner %}
+
+
+
+{% block main %}
+
+
+    <div class="section trending">
+        <div class="is-active d-flex justify-content-center">
+            {% if user.is_superuser %}
+                <ul class="trending-filter">
+                    <li>
+                        <a href="{% url 'add_game' %}" class="text-info">+ Добавить Игру</a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'add_genre' %}" class="text-success">+ Добавить Жанр</a>
+                    </li>
+                </ul>
+            {% endif %}
+        </div>
+        <div class="container">
+            {% include 'store/components/shop/_categories.html' %}
+
+
+            {% include 'store/components/shop/_games.html' %}
+
+
+        </div>
+    </div>
+{% endblock main %}

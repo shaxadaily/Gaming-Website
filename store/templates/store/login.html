@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block banner %}
+    <div class="page-heading header-text">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>{{ title }}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock banner %}
+
+
+{% block main %}
+    <div class="d-flex justify-content-center">
+        <div class="card col-6 p-4">
+            <h3>{{ title }}</h3>
+            <form action="" method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="fieldWrapper">
+                        <br>
+                        {{ field.label_tag }} {{ field }}
+                    </div>
+                {% endfor %}
+                <br>
+                {% if request.path == '/login/' %}
+                <button type="submit" class="btn btn-warning">Войти</button>
+                {% else %}
+                <button type="submit" class="btn btn-warning">Зарегестрироватся</button>
+                {% endif %}
+                <br><br>
+                {% if request.path == '/login/' %}
+                    <p>Еще не создали аккаунт? <a href="{% url 'register' %}">Зарегестрируйтесь</a></p>
+                {% else %}
+                    <p>Уже есть аккаунт? <a href="{% url 'login' %}">Войдите</a></p>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+{% endblock main %}
+
+
+

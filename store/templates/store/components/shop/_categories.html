@@ -1,0 +1,25 @@
+
+
+{% load store_tags %}
+
+
+<ul class="trending-filter">
+    <li>
+
+        <a class="{% if request.path == '/shop/' %} is_active{% endif %}" href="{% url 'shop_page' %}">
+            Показать все({% count_all_games %})
+        </a>
+
+
+    </li>
+    {% for genre in genres %}
+    <li>
+        <a class="{% if request.path == genre.get_absolute_url %} is_active {% endif %}" href="{{ genre.get_absolute_url }}">
+            {{ genre.title }} ({% count_games genre.pk %})
+        </a>
+
+    </li>
+    {% endfor %}
+</ul>
+
+

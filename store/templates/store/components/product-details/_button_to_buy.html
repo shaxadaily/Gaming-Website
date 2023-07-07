@@ -1,0 +1,7 @@
+
+
+{% if profile.subscription is True %}
+<a href="{{ profile.get_absolute_url }}" class="btn btn-success"><i class="fa fa-shopping-bag"></i>{{ profile.subscription }}</a>
+{% else %}
+<a href="{{ profile.get_absolute_url }}" class="btn btn-success"><i class="fa fa-shopping-bag"></i> {{ profile.subscription }}</a>
+{% endif %}

@@ -1,0 +1,30 @@
+<div class="row trending-box">
+    {% for game in games %}
+        <div class="col-lg-3 col-md-6 align-self-center mb-30 trending-items col-md-6 adv ">
+
+            <div class="item">
+                <div class="thumb">
+
+                    <!-- game.get_absolute_ulr(ССЫЛКА НА product-details)             -->
+                    <a href="{% if user.is_authenticated %} {{ game.get_absolute_url }} {% else %}{% url 'login' %}{% endif %}"><img
+                            class="image__game" src="{{ game.show_poster }}" alt=""></a>
+
+                </div>
+
+                <div class="down-content">
+                    <div>
+                        {% for genre in game.genres.all %}
+                            <span class="category">{{ genre }}</span>
+                        {% endfor %}
+                    </div>
+                    <h4>{{ game.title }}</h4>
+                    <a href="
+                            {% if user.is_authenticated %}{{ game.get_absolute_url }}{% else %}{% url 'login' %}{% endif %}"><i
+                            class="fa fa-shopping-bag"></i></a>
+
+                </div>
+            </div>
+        </div>
+
+    {% endfor %}
+</div>
